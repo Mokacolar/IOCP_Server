@@ -1,0 +1,333 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="IocpObject" Collapsed="true">
+    <Position X="1.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IocpCore.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IocpCore" Collapsed="true">
+    <Position X="19.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIgAAAAAAAAAAEAAAAAAAAAAAAIBAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>IocpCore.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IocpEvent" Collapsed="true">
+    <Position X="5.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAQAAAAAAEAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>IocpEvent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConnectEvent" Collapsed="true">
+    <Position X="3" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IocpEvent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DisconnectEvent" Collapsed="true">
+    <Position X="5.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IocpEvent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AcceptEvent" Collapsed="true">
+    <Position X="7.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IocpEvent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RecvEvent" Collapsed="true">
+    <Position X="9.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>IocpEvent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SendEvent" Collapsed="true">
+    <Position X="0.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAI=</HashCode>
+      <FileName>IocpEvent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Listener" Collapsed="true">
+    <Position X="2.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AKgAAAEAAAAAAEAQAAAAQECAAAAAAACAAAAAQAAAAAA=</HashCode>
+      <FileName>Listener.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NetAddress" Collapsed="true">
+    <Position X="17.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAQAAAAAAEAAAAAAAAAAAAAAgAAAACAAAAAAA=</HashCode>
+      <FileName>NetAddress.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RecvBuffer" Collapsed="true">
+    <Position X="15.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAQAAAgAAAAEAMAAAAAgAQAAACAQgACAAABAAAAQAA=</HashCode>
+      <FileName>RecvBuffer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SendBuffer" Collapsed="true">
+    <Position X="19.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAgAAQAAAAAAAAAAAACAAAABAEACAAAAACAQAA=</HashCode>
+      <FileName>SendBuffer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SendBufferChunk" Collapsed="true">
+    <Position X="12.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IgAAAAAgAAAAJAAAAAAAAAAAAAABAAAAAAAIABCAQAg=</HashCode>
+      <FileName>SendBuffer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SendBufferManager" Collapsed="true">
+    <Position X="14" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAACAAAAAAAAAACAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>SendBuffer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Session" Collapsed="true">
+    <Position X="0.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AI6IFAIIBAAAERNQAEAAgIQBhAAAAIIDACCAQAEAAFA=</HashCode>
+      <FileName>Session.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Service" Collapsed="true">
+    <Position X="5.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAECCAgEBUAAQQAIAAIAAAAQAAQAAAAIAACUAA=</HashCode>
+      <FileName>Service.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ClientService" Collapsed="true">
+    <Position X="5.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Service.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacketSession" Collapsed="true">
+    <Position X="0.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAgAgAAAABAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Session.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SocketUtils" Collapsed="true">
+    <Position X="15.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAgAAAkAIAgEUAABAAAAAAAAAAgAAAAAAGAADAAAA=</HashCode>
+      <FileName>SocketUtils.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoreGlobal" Collapsed="true">
+    <Position X="15.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>CoreGlobal.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DeadLockProfiler" Collapsed="true">
+    <Position X="17.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gIAAAAAAISAAAAAgAAAAAAAQIgAgAAAAAEAAAABAAAA=</HashCode>
+      <FileName>DeadLockProfiler.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lock" Collapsed="true">
+    <Position X="12.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAABAAAAAAABAAAEAAAAAAAAAAAkA=</HashCode>
+      <FileName>Lock.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ReadLockGuard" Collapsed="true">
+    <Position X="14" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAgAAAACAAAAAAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>Lock.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WriteLockGuard" Collapsed="true">
+    <Position X="17.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAIAAAAAAAAAAgAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Lock.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ThreadManager" Collapsed="true">
+    <Position X="12.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAQAAAAAggQAAAAAAAAAAAAAAACIAAABAAAAA=</HashCode>
+      <FileName>ThreadManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseAllocator" Collapsed="true">
+    <Position X="12.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>Allocator.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StompAllocator" Collapsed="true">
+    <Position X="19.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>Allocator.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PoolAllocator" Collapsed="true">
+    <Position X="12.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>Allocator.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StlAllocator&lt;T&gt;" Collapsed="true">
+    <Position X="17.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAEAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Allocator.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Memory" Collapsed="true">
+    <Position X="14" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEBAAAAAABAAAAAAAAAAAAAAQAAgAAABAAAAA=</HashCode>
+      <FileName>Memory.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MemoryPool" Collapsed="true">
+    <Position X="15.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQEAAAAAAAAAAEACABAAAIAAAAAAACAA=</HashCode>
+      <FileName>MemoryPool.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ObjectPool&lt;Type&gt;" Collapsed="true">
+    <Position X="19.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAQAgAAACAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>ObjectPool.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RefCountable" Collapsed="true">
+    <Position X="17.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAhAAAAAAAABAAQAAAAAAAIAAAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>RefCounting.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TSharedPtr&lt;T&gt;" Collapsed="true">
+    <Position X="14" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAQAAABAIAAQAAAwAAAAAAAAAIAAAgABAAAAA=</HashCode>
+      <FileName>RefCounting.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Conversion&lt;From, To&gt;" Collapsed="true">
+    <Position X="14" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>TypeCast.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TypeConversion&lt;TL&gt;" Collapsed="true">
+    <Position X="15.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAIAAAAAAACAA=</HashCode>
+      <FileName>TypeCast.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="PacketHeader" Collapsed="true">
+    <Position X="12.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Session.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="MemoryHeader" Collapsed="true">
+    <Position X="19.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAACAAACAAQAAIAAAAAAAAAAA=</HashCode>
+      <FileName>MemoryPool.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="TypeList&lt;T, U&gt;" Collapsed="true">
+    <Position X="15.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TypeCast.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Length&lt;TypeList&lt;&gt;&gt;" Collapsed="true">
+    <Position X="17.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TypeCast.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="TypeAt&lt;TypeList&lt;Head,Tail...&gt;, 0&gt;" Collapsed="true">
+    <Position X="14" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TypeCast.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="IndexOf&lt;TypeList&lt;T,Tail...&gt;, T&gt;" Collapsed="true">
+    <Position X="12.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TypeCast.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="IndexOf&lt;TypeList&lt;&gt;, T&gt;" Collapsed="true">
+    <Position X="14" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TypeCast.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Int2Type&lt;v&gt;" Collapsed="true">
+    <Position X="15.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TypeCast.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="EventType" Collapsed="true">
+    <Position X="14" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAAAAAAAAAAAAAEAAAIAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IocpEvent.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ServiceType" Collapsed="true">
+    <Position X="15.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAQ=</HashCode>
+      <FileName>Service.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="__unnamed_enum_0626_1" Collapsed="true">
+    <Position X="12.25" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MemoryPool.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="맑은 고딕" Size="9" />
+</ClassDiagram>
