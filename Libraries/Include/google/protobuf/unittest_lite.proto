@@ -38,7 +38,6 @@ package protobuf_unittest;
 
 import "google/protobuf/unittest_import_lite.proto";
 
-option cc_enable_arenas = true;
 option optimize_for = LITE_RUNTIME;
 option java_package = "com.google.protobuf";
 
@@ -47,11 +46,6 @@ message TestAllTypesLite {
   message NestedMessage {
     optional int32 bb = 1;
     optional int64 cc = 2;
-    repeated int32 dd = 3 [packed = true];
-  }
-
-  message NestedMessage2 {
-    optional int32 dd = 1;
   }
 
   enum NestedEnum {
@@ -168,7 +162,6 @@ message TestAllTypesLite {
     string oneof_string = 113;
     bytes oneof_bytes = 114;
     NestedMessage oneof_lazy_nested_message = 115 [lazy = true];
-    NestedMessage2 oneof_nested_message2 = 117;
   }
 
   // Tests toString for non-repeated fields with a list suffix
@@ -392,12 +385,6 @@ message TestParsingMergeLite {
   }
 }
 
-// Test that the correct exception is thrown by parseFrom in a corner case
-// involving merging, extensions, and required fields.
-message TestMergeExceptionLite {
-  optional TestAllExtensionsLite all_extensions = 1;
-}
-
 // TestEmptyMessageLite is used to test unknown fields support in lite mode.
 message TestEmptyMessageLite {}
 
@@ -470,12 +457,6 @@ message TestOneofParsingLite {
   }
 }
 
-message TestMessageSetLite {
-  option message_set_wire_format = true;
-
-  extensions 100 to max;
-}
-
 // The following four messages are set up to test for wire compatibility between
 // packed and non-packed repeated fields. We use the field number 2048, because
 // that is large enough to require a 3-byte varint for the tag.
@@ -506,9 +487,4 @@ message DupEnum {
     FOO2 = 1;
     BAR2 = 2;
   }
-}
-
-message RecursiveMessage {
-  optional RecursiveMessage recurse = 1;
-  optional bytes payload = 2;
 }

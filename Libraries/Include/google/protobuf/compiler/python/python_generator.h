@@ -40,7 +40,6 @@
 #include <google/protobuf/compiler/code_generator.h>
 #include <google/protobuf/stubs/mutex.h>
 
-// Must be included last.
 #include <google/protobuf/port_def.inc>
 
 namespace google {
@@ -67,21 +66,23 @@ namespace python {
 class PROTOC_EXPORT Generator : public CodeGenerator {
  public:
   Generator();
-  ~Generator() override;
+  virtual ~Generator();
 
   // CodeGenerator methods.
-  bool Generate(const FileDescriptor* file, const std::string& parameter,
-                GeneratorContext* generator_context,
-                std::string* error) const override;
-
-  uint64_t GetSupportedFeatures() const override;
+  virtual bool Generate(const FileDescriptor* file,
+                        const std::string& parameter,
+                        GeneratorContext* generator_context,
+                        std::string* error) const;
 
  private:
   void PrintImports() const;
   void PrintFileDescriptor() const;
+  void PrintTopLevelEnums() const;
   void PrintAllNestedEnumsInFile() const;
   void PrintNestedEnums(const Descriptor& descriptor) const;
   void PrintEnum(const EnumDescriptor& enum_descriptor) const;
+
+  void PrintTopLevelExtensions() const;
 
   void PrintFieldDescriptor(const FieldDescriptor& field,
                             bool is_extension) const;
@@ -148,18 +149,13 @@ class PROTOC_EXPORT Generator : public CodeGenerator {
 
   template <typename DescriptorT, typename DescriptorProtoT>
   void PrintSerializedPbInterval(const DescriptorT& descriptor,
-                                 DescriptorProtoT& proto,
-                                 const std::string& name) const;
+                                 DescriptorProtoT& proto) const;
 
   void FixAllDescriptorOptions() const;
   void FixOptionsForField(const FieldDescriptor& field) const;
   void FixOptionsForOneof(const OneofDescriptor& oneof) const;
   void FixOptionsForEnum(const EnumDescriptor& descriptor) const;
-  void FixOptionsForService(const ServiceDescriptor& descriptor) const;
   void FixOptionsForMessage(const Descriptor& descriptor) const;
-
-  void SetSerializedPbInterval() const;
-  void SetMessagePbInterval(const Descriptor& descriptor) const;
 
   void CopyPublicDependenciesAliases(const std::string& copy_from,
                                      const FileDescriptor* file) const;

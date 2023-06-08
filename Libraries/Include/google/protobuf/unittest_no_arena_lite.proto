@@ -28,11 +28,15 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_STRING_MEMBER_ROBBER_H__
-#define GOOGLE_PROTOBUF_STRING_MEMBER_ROBBER_H__
+syntax = "proto2";
 
-#include <string>
-#include <type_traits>
+option optimize_for = LITE_RUNTIME;
 
+// We don't put this in a package within proto2 because we need to make sure
+// that the generated code doesn't depend on being in the proto2 namespace.
+// In test_util.h we do "using namespace unittest = protobuf_unittest".
+package protobuf_unittest_no_arena;
 
-#endif  // GOOGLE_PROTOBUF_STRING_MEMBER_ROBBER_H__
+message ForeignMessageLite {
+  optional int32 c = 1;
+}

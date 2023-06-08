@@ -28,13 +28,11 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_UTIL_INTERNAL_PROTO_WRITER_H__
-#define GOOGLE_PROTOBUF_UTIL_INTERNAL_PROTO_WRITER_H__
+#ifndef GOOGLE_PROTOBUF_UTIL_CONVERTER_PROTO_WRITER_H__
+#define GOOGLE_PROTOBUF_UTIL_CONVERTER_PROTO_WRITER_H__
 
-#include <cstdint>
 #include <deque>
 #include <string>
-#include <unordered_set>
 #include <vector>
 
 #include <google/protobuf/stubs/common.h>
@@ -42,24 +40,21 @@
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/io/zero_copy_stream_impl.h>
 #include <google/protobuf/descriptor.h>
-#include <google/protobuf/stubs/bytestream.h>
-#include <google/protobuf/stubs/status.h>
+#include <google/protobuf/util/internal/type_info.h>
 #include <google/protobuf/util/internal/datapiece.h>
 #include <google/protobuf/util/internal/error_listener.h>
 #include <google/protobuf/util/internal/structured_objectwriter.h>
-#include <google/protobuf/util/internal/type_info.h>
 #include <google/protobuf/util/type_resolver.h>
+#include <google/protobuf/stubs/bytestream.h>
 #include <google/protobuf/stubs/hash.h>
 #include <google/protobuf/stubs/status.h>
 
-// Must be included last.
 #include <google/protobuf/port_def.inc>
 
 namespace google {
 namespace protobuf {
 namespace util {
 namespace converter {
-
 
 class ObjectLocationTracker;
 
@@ -84,16 +79,16 @@ class PROTOBUF_EXPORT ProtoWriter : public StructuredObjectWriter {
   ProtoWriter* RenderBool(StringPiece name, bool value) override {
     return RenderDataPiece(name, DataPiece(value));
   }
-  ProtoWriter* RenderInt32(StringPiece name, int32_t value) override {
+  ProtoWriter* RenderInt32(StringPiece name, int32 value) override {
     return RenderDataPiece(name, DataPiece(value));
   }
-  ProtoWriter* RenderUint32(StringPiece name, uint32_t value) override {
+  ProtoWriter* RenderUint32(StringPiece name, uint32 value) override {
     return RenderDataPiece(name, DataPiece(value));
   }
-  ProtoWriter* RenderInt64(StringPiece name, int64_t value) override {
+  ProtoWriter* RenderInt64(StringPiece name, int64 value) override {
     return RenderDataPiece(name, DataPiece(value));
   }
-  ProtoWriter* RenderUint64(StringPiece name, uint64_t value) override {
+  ProtoWriter* RenderUint64(StringPiece name, uint64 value) override {
     return RenderDataPiece(name, DataPiece(value));
   }
   ProtoWriter* RenderDouble(StringPiece name, double value) override {
@@ -107,12 +102,10 @@ class PROTOBUF_EXPORT ProtoWriter : public StructuredObjectWriter {
     return RenderDataPiece(name,
                            DataPiece(value, use_strict_base64_decoding()));
   }
-
   ProtoWriter* RenderBytes(StringPiece name, StringPiece value) override {
     return RenderDataPiece(
         name, DataPiece(value, false, use_strict_base64_decoding()));
   }
-
   ProtoWriter* RenderNull(StringPiece name) override {
     return RenderDataPiece(name, DataPiece::NullData());
   }
@@ -121,8 +114,7 @@ class PROTOBUF_EXPORT ProtoWriter : public StructuredObjectWriter {
   // Renders a DataPiece 'value' into a field whose wire type is determined
   // from the given field 'name'.
   virtual ProtoWriter* RenderDataPiece(StringPiece name,
-                                       const DataPiece& data);
-
+                                       const DataPiece& value);
 
   // Returns the location tracker to use for tracking locations for errors.
   const LocationTrackerInterface& location() {
@@ -160,11 +152,6 @@ class PROTOBUF_EXPORT ProtoWriter : public StructuredObjectWriter {
 
   void set_case_insensitive_enum_parsing(bool case_insensitive_enum_parsing) {
     case_insensitive_enum_parsing_ = case_insensitive_enum_parsing;
-  }
-
-  void set_use_json_name_in_missing_fields(
-      bool use_json_name_in_missing_fields) {
-    use_json_name_in_missing_fields_ = use_json_name_in_missing_fields;
   }
 
  protected:
@@ -206,11 +193,11 @@ class PROTOBUF_EXPORT ProtoWriter : public StructuredObjectWriter {
     }
 
     // Returns true if the index is already taken by a preceding oneof input.
-    bool IsOneofIndexTaken(int32_t index);
+    bool IsOneofIndexTaken(int32 index);
 
     // Marks the oneof 'index' as taken. Future inputs to this oneof will
     // generate an error.
-    void TakeOneofIndex(int32_t index);
+    void TakeOneofIndex(int32 index);
 
     bool proto3() { return proto3_; }
 
@@ -236,7 +223,7 @@ class PROTOBUF_EXPORT ProtoWriter : public StructuredObjectWriter {
     // size_index_       : index into ProtoWriter::size_insert_
     //                     for later insertion of serialized message length.
     const google::protobuf::Type& type_;
-    std::unordered_set<const google::protobuf::Field*> required_fields_;
+    std::set<const google::protobuf::Field*> required_fields_;
     const int size_index_;
 
     // Tracks position in repeated fields, needed for LocationTrackerInterface.
@@ -309,19 +296,19 @@ class PROTOBUF_EXPORT ProtoWriter : public StructuredObjectWriter {
   ProtoWriter* StartListField(const google::protobuf::Field& field,
                               const google::protobuf::Type& type);
 
-  // Renders a primitive field given the field and the enclosing type.
+  // Renders a primitve field given the field and the enclosing type.
   ProtoWriter* RenderPrimitiveField(const google::protobuf::Field& field,
                                     const google::protobuf::Type& type,
-                                    const DataPiece& data);
+                                    const DataPiece& value);
 
  private:
   // Writes an ENUM field, including tag, to the stream.
   static util::Status WriteEnum(int field_number, const DataPiece& data,
-                                const google::protobuf::Enum* enum_type,
-                                io::CodedOutputStream* stream,
-                                bool use_lower_camel_for_enums,
-                                bool case_insensitive_enum_parsing,
-                                bool ignore_unknown_values);
+                                  const google::protobuf::Enum* enum_type,
+                                  io::CodedOutputStream* stream,
+                                  bool use_lower_camel_for_enums,
+                                  bool case_insensitive_enum_parsing,
+                                  bool ignore_unknown_values);
 
   // Variables for describing the structure of the input tree:
   // master_type_: descriptor for the whole protobuf message.
@@ -346,9 +333,6 @@ class PROTOBUF_EXPORT ProtoWriter : public StructuredObjectWriter {
 
   // If true, check if enum name in UPPER_CASE matches the field name.
   bool case_insensitive_enum_parsing_;
-
-  // If true, use the json name in missing fields errors.
-  bool use_json_name_in_missing_fields_;
 
   // Variable for internal state processing:
   // element_    : the current element.
@@ -386,4 +370,4 @@ class PROTOBUF_EXPORT ProtoWriter : public StructuredObjectWriter {
 
 #include <google/protobuf/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_UTIL_INTERNAL_PROTO_WRITER_H__
+#endif  // GOOGLE_PROTOBUF_UTIL_CONVERTER_PROTO_WRITER_H__

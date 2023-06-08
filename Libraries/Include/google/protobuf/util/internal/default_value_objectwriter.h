@@ -28,22 +28,21 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_UTIL_INTERNAL_DEFAULT_VALUE_OBJECTWRITER_H__
-#define GOOGLE_PROTOBUF_UTIL_INTERNAL_DEFAULT_VALUE_OBJECTWRITER_H__
+#ifndef GOOGLE_PROTOBUF_UTIL_CONVERTER_DEFAULT_VALUE_OBJECTWRITER_H__
+#define GOOGLE_PROTOBUF_UTIL_CONVERTER_DEFAULT_VALUE_OBJECTWRITER_H__
 
-#include <cstdint>
 #include <functional>
 #include <memory>
 #include <stack>
 #include <vector>
 
 #include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/strutil.h>
+#include <google/protobuf/util/internal/type_info.h>
 #include <google/protobuf/util/internal/datapiece.h>
 #include <google/protobuf/util/internal/object_writer.h>
-#include <google/protobuf/util/internal/type_info.h>
 #include <google/protobuf/util/internal/utility.h>
 #include <google/protobuf/util/type_resolver.h>
+#include <google/protobuf/stubs/strutil.h>
 
 // Must be included last.
 #include <google/protobuf/port_def.inc>
@@ -81,7 +80,7 @@ class PROTOBUF_EXPORT DefaultValueObjectWriter : public ObjectWriter {
                            const google::protobuf::Type& type,
                            ObjectWriter* ow);
 
-  ~DefaultValueObjectWriter() override;
+  virtual ~DefaultValueObjectWriter();
 
   // ObjectWriter methods.
   DefaultValueObjectWriter* StartObject(StringPiece name) override;
@@ -96,16 +95,16 @@ class PROTOBUF_EXPORT DefaultValueObjectWriter : public ObjectWriter {
                                        bool value) override;
 
   DefaultValueObjectWriter* RenderInt32(StringPiece name,
-                                        int32_t value) override;
+                                        int32 value) override;
 
   DefaultValueObjectWriter* RenderUint32(StringPiece name,
-                                         uint32_t value) override;
+                                         uint32 value) override;
 
   DefaultValueObjectWriter* RenderInt64(StringPiece name,
-                                        int64_t value) override;
+                                        int64 value) override;
 
   DefaultValueObjectWriter* RenderUint64(StringPiece name,
-                                         uint64_t value) override;
+                                         uint64 value) override;
 
   DefaultValueObjectWriter* RenderDouble(StringPiece name,
                                          double value) override;
@@ -202,7 +201,7 @@ class PROTOBUF_EXPORT DefaultValueObjectWriter : public ObjectWriter {
     // Returns the Value Type of a map given the Type of the map entry and a
     // TypeInfo instance.
     const google::protobuf::Type* GetMapValueType(
-        const google::protobuf::Type& found_type, const TypeInfo* typeinfo);
+        const google::protobuf::Type& entry_type, const TypeInfo* typeinfo);
 
     // Calls WriteTo() on every child in children_.
     void WriteChildren(ObjectWriter* ow);
@@ -329,4 +328,4 @@ class PROTOBUF_EXPORT DefaultValueObjectWriter : public ObjectWriter {
 
 #include <google/protobuf/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_UTIL_INTERNAL_DEFAULT_VALUE_OBJECTWRITER_H__
+#endif  // GOOGLE_PROTOBUF_UTIL_CONVERTER_DEFAULT_VALUE_OBJECTWRITER_H__

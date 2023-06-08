@@ -41,40 +41,37 @@ namespace compiler {
 namespace objectivec {
 
 class MessageFieldGenerator : public ObjCObjFieldGenerator {
-  friend FieldGenerator* FieldGenerator::Make(const FieldDescriptor* field);
+  friend FieldGenerator* FieldGenerator::Make(const FieldDescriptor* field,
+                                              const Options& options);
 
  protected:
-  MessageFieldGenerator(const FieldDescriptor* descriptor);
+  MessageFieldGenerator(const FieldDescriptor* descriptor,
+                        const Options& options);
 
   MessageFieldGenerator(const MessageFieldGenerator&) = delete;
   MessageFieldGenerator& operator=(const MessageFieldGenerator&) = delete;
 
   virtual ~MessageFieldGenerator();
+  virtual bool WantsHasProperty(void) const;
 
  public:
-  virtual void DetermineForwardDeclarations(
-      std::set<std::string>* fwd_decls,
-      bool include_external_types) const override;
-  virtual void DetermineObjectiveCClassDefinitions(
-      std::set<std::string>* fwd_decls) const override;
+  virtual void DetermineForwardDeclarations(std::set<string>* fwd_decls) const;
 };
 
 class RepeatedMessageFieldGenerator : public RepeatedFieldGenerator {
-  friend FieldGenerator* FieldGenerator::Make(const FieldDescriptor* field);
+  friend FieldGenerator* FieldGenerator::Make(const FieldDescriptor* field,
+                                              const Options& options);
 
  protected:
-  RepeatedMessageFieldGenerator(const FieldDescriptor* descriptor);
+  RepeatedMessageFieldGenerator(const FieldDescriptor* descriptor,
+                                const Options& options);
   virtual ~RepeatedMessageFieldGenerator();
 
   RepeatedMessageFieldGenerator(const RepeatedMessageFieldGenerator&) = delete;
   RepeatedMessageFieldGenerator operator=(const RepeatedMessageFieldGenerator&) = delete;
 
  public:
-  virtual void DetermineForwardDeclarations(
-      std::set<std::string>* fwd_decls,
-      bool include_external_types) const override;
-  virtual void DetermineObjectiveCClassDefinitions(
-      std::set<std::string>* fwd_decls) const override;
+  virtual void DetermineForwardDeclarations(std::set<string>* fwd_decls) const;
 };
 
 }  // namespace objectivec

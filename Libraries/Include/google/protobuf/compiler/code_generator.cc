@@ -50,7 +50,7 @@ bool CodeGenerator::GenerateAll(const std::vector<const FileDescriptor*>& files,
                                 const std::string& parameter,
                                 GeneratorContext* generator_context,
                                 std::string* error) const {
-  // Default implementation is just to call the per file method, and prefix any
+  // Default implemenation is just to call the per file method, and prefix any
   // error string with the file to provide context.
   bool succeeded = true;
   for (int i = 0; i < files.size(); i++) {
@@ -76,19 +76,13 @@ GeneratorContext::~GeneratorContext() {}
 
 io::ZeroCopyOutputStream* GeneratorContext::OpenForAppend(
     const std::string& filename) {
-  return nullptr;
+  return NULL;
 }
 
 io::ZeroCopyOutputStream* GeneratorContext::OpenForInsert(
     const std::string& filename, const std::string& insertion_point) {
   GOOGLE_LOG(FATAL) << "This GeneratorContext does not support insertion.";
-  return nullptr;  // make compiler happy
-}
-
-io::ZeroCopyOutputStream* GeneratorContext::OpenForInsertWithGeneratedCodeInfo(
-    const std::string& filename, const std::string& insertion_point,
-    const google::protobuf::GeneratedCodeInfo& /*info*/) {
-  return OpenForInsert(filename, insertion_point);
+  return NULL;  // make compiler happy
 }
 
 void GeneratorContext::ListParsedFiles(
@@ -120,15 +114,6 @@ void ParseGeneratorParameter(
       value.second = parts[i].substr(equals_pos + 1);
     }
     output->push_back(value);
-  }
-}
-
-// Strips ".proto" or ".protodevel" from the end of a filename.
-std::string StripProto(const std::string& filename) {
-  if (HasSuffixString(filename, ".protodevel")) {
-    return StripSuffixString(filename, ".protodevel");
-  } else {
-    return StripSuffixString(filename, ".proto");
   }
 }
 

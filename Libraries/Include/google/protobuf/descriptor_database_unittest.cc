@@ -34,20 +34,19 @@
 //
 // This file makes extensive use of RFC 3092.  :)
 
-#include <google/protobuf/descriptor_database.h>
-
 #include <algorithm>
 #include <memory>
 
-#include <google/protobuf/stubs/logging.h>
-#include <google/protobuf/stubs/common.h>
 #include <google/protobuf/descriptor.pb.h>
 #include <google/protobuf/descriptor.h>
+#include <google/protobuf/descriptor_database.h>
 #include <google/protobuf/text_format.h>
+
+#include <google/protobuf/stubs/logging.h>
+#include <google/protobuf/stubs/common.h>
 #include <gmock/gmock.h>
 #include <google/protobuf/testing/googletest.h>
 #include <gtest/gtest.h>
-
 
 namespace google {
 namespace protobuf {
@@ -547,7 +546,7 @@ TEST(SimpleDescriptorDatabaseExtraTest, FindAllPackageNames) {
   db.Add(f);
   db.Add(b);
 
-  std::vector<std::string> packages;
+  std::vector<string> packages;
   EXPECT_TRUE(db.FindAllPackageNames(&packages));
   EXPECT_THAT(packages, ::testing::UnorderedElementsAre("foo", ""));
 }
@@ -567,7 +566,7 @@ TEST(SimpleDescriptorDatabaseExtraTest, FindAllMessageNames) {
   db.Add(f);
   db.Add(b);
 
-  std::vector<std::string> messages;
+  std::vector<string> messages;
   EXPECT_TRUE(db.FindAllMessageNames(&messages));
   EXPECT_THAT(messages, ::testing::UnorderedElementsAre("foo.Foo", "Bar"));
 }
@@ -580,7 +579,7 @@ class MergedDescriptorDatabaseTest : public testing::Test {
       : forward_merged_(&database1_, &database2_),
         reverse_merged_(&database2_, &database1_) {}
 
-  void SetUp() override {
+  virtual void SetUp() {
     AddToDatabase(
         &database1_,
         "name: \"foo.proto\" "
@@ -798,14 +797,6 @@ TEST_F(MergedDescriptorDatabaseTest, FindAllExtensionNumbers) {
     EXPECT_FALSE(reverse_merged_.FindAllExtensionNumbers("Blah", &numbers));
   }
 }
-
-TEST_F(MergedDescriptorDatabaseTest, FindAllFileNames) {
-  std::vector<std::string> files;
-  EXPECT_TRUE(forward_merged_.FindAllFileNames(&files));
-  EXPECT_THAT(files, ::testing::UnorderedElementsAre("foo.proto", "bar.proto",
-                                                     "baz.proto", "baz.proto"));
-}
-
 
 }  // anonymous namespace
 }  // namespace protobuf
