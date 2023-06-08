@@ -28,10 +28,14 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-syntax = "proto2";
+#include <google/protobuf/map.h>
 
-package proto2_arena_unittest;
+namespace google {
+namespace protobuf {
+namespace internal {
 
-message ImportNoArenaNestedMessage {
-  optional int32 d = 1;
-};
+void* const kGlobalEmptyTable[kGlobalEmptyTableSize] = {nullptr};
+
+}  // namespace internal
+}  // namespace protobuf
+}  // namespace google
