@@ -17,7 +17,10 @@ public:
 
 	virtual void OnConnected() override
 	{
-		//cout << "Connected To Server" << endl;
+		// 로그인 후 웹서버에서 인증이 성공적으로 완료된 후
+		Protocol::C_LOGIN pkt;
+		auto sendBuffer = ServerPacketHandler::MakeSendBuffer(pkt);
+		Send(sendBuffer);
 	}
 
 	virtual void OnRecvPacket(BYTE* buffer, int32 len) override

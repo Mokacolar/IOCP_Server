@@ -15,6 +15,14 @@ bool Handle_INVALID(PacketSessionRef& session, BYTE* buffer, int32 len)
 
 bool Handle_C_LOGIN(PacketSessionRef& session, Protocol::C_LOGIN& pkt)
 {
+	// validation check 후
+	Protocol::S_LOGIN loginPkt;
+	loginPkt.set_success(true);
+
+	// DB에서 플레이 정보를 가져오고
+	// GameSession에 플레이 정보를 저장 (메모리상에서)
+
+
 	return true;
 }
 
