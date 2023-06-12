@@ -22,6 +22,15 @@ void Service::CloseService()
 	// TODO
 }
 
+void Service::Broadcast(SendBufferRef sendBuffer)
+{
+	WRITE_LOCK;
+	for (const auto& session : _sessions)
+	{
+		session->Send(sendBuffer);
+	}
+}
+
 SessionRef Service::CreateSession()
 {
 	SessionRef session = _sessionFactory();
@@ -58,31 +67,20 @@ ClientService::ClientService(NetAddress targetAddress, IocpCoreRef core, Session
 
 bool ClientService::Start()
 {
-	cout << "Connect to Server . . ." << endl;
-
-	if (CanStart() == false) {
-		cout << "CLIENT CANSTART ERROR" << endl;
+	if (CanStart() == false)
 		return false;
-	}
 
 	const int32 sessionCount = GetMaxSessionCount();
 	for (int32 i = 0; i < sessionCount; i++)
 	{
 		SessionRef session = CreateSession();
-		if (session->Connect() == false) {
-			cout << "CLIENT CONNECT ERROR" << endl;
+		if (session->Connect() == false)
 			return false;
-		}
 	}
-	
-	
+
 	return true;
 }
 
-
-/*-----------------
-	ServerService
-------------------*/
 ServerService::ServerService(NetAddress address, IocpCoreRef core, SessionFactory factory, int32 maxSessionCount)
 	: Service(ServiceType::Server, address, core, factory, maxSessionCount)
 {
@@ -90,27 +88,16 @@ ServerService::ServerService(NetAddress address, IocpCoreRef core, SessionFactor
 
 bool ServerService::Start()
 {
-	cout << "Server Starting . . ." << endl;
-
-
-	if (CanStart() == false) {
-		cout << "SERVER CANSTART ERROR" << endl;
+	if (CanStart() == false)
 		return false;
-	}
 
 	_listener = MakeShared<Listener>();
-	if (_listener == nullptr) {
-		cout << "LISTENER NULL POINT ERROR" << endl;
+	if (_listener == nullptr)
 		return false;
-	}
 
 	ServerServiceRef service = static_pointer_cast<ServerService>(shared_from_this());
-	if (_listener->StartAccept(service) == false) {
-		cout << "START ACCEPT ERROR" << endl;
+	if (_listener->StartAccept(service) == false)
 		return false;
-	}
-
-	cout << "Server Start!" << endl;
 
 	return true;
 }

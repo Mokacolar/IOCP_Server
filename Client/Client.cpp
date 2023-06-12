@@ -17,7 +17,6 @@ public:
 
 	virtual void OnConnected() override
 	{
-		// 로그인 후 웹서버에서 인증이 성공적으로 완료된 후
 		Protocol::C_LOGIN pkt;
 		auto sendBuffer = ServerPacketHandler::MakeSendBuffer(pkt);
 		Send(sendBuffer);
@@ -53,7 +52,7 @@ int main()
 		NetAddress(L"127.0.0.1", 7777),
 		MakeShared<IocpCore>(),
 		MakeShared<ServerSession>, // TODO : SessionManager 등
-		1);
+		100);
 
 	ASSERT_CRASH(service->Start());
 
@@ -66,6 +65,16 @@ int main()
 					service->GetIocpCore()->Dispatch();
 				}
 			});
+	}
+
+	Protocol::C_CHAT chatPkt;
+	chatPkt.set_msg(u8"Hello World !");
+	auto sendBuffer = ServerPacketHandler::MakeSendBuffer(chatPkt);
+
+	while (true)
+	{
+		service->Broadcast(sendBuffer);
+		this_thread::sleep_for(1s);
 	}
 
 	GThreadManager->Join();
