@@ -2,18 +2,19 @@
 #include "ThreadManager.h"
 #include "CoreTLS.h"
 #include "CoreGlobal.h"
-#include "CorePch.h"
+#include "GlobalQueue.h"
 
-/*---------------------
-	ThreadManager 
----------------------*/
+/*------------------
+	ThreadManager
+-------------------*/
 
-ThreadManager::ThreadManager() 
+ThreadManager::ThreadManager()
 {
+	// Main Thread
 	InitTLS();
 }
 
-ThreadManager::~ThreadManager() 
+ThreadManager::~ThreadManager()
 {
 	Join();
 }
@@ -21,6 +22,7 @@ ThreadManager::~ThreadManager()
 void ThreadManager::Launch(function<void(void)> callback)
 {
 	LockGuard guard(_lock);
+
 	_threads.push_back(thread([=]()
 		{
 			InitTLS();
@@ -31,14 +33,15 @@ void ThreadManager::Launch(function<void(void)> callback)
 
 void ThreadManager::Join()
 {
-	for (thread& t : _threads) {
+	for (thread& t : _threads)
+	{
 		if (t.joinable())
 			t.join();
 	}
 	_threads.clear();
 }
 
-void ThreadManager::InitTLS() 
+void ThreadManager::InitTLS()
 {
 	static Atomic<uint32> SThreadId = 1;
 	LThreadId = SThreadId.fetch_add(1);
@@ -46,5 +49,21 @@ void ThreadManager::InitTLS()
 
 void ThreadManager::DestroyTLS()
 {
-	//동적으로 생성되는 TLS 날려주기
+
+}
+
+void ThreadManager::DoGlobalQueueWork()
+{
+	while (true)
+	{
+		uint64 now = ::GetTickCount64();
+		if (now > LEndTickCount)
+			break;
+
+		JobQueueRef jobQueue = GGlobalQueue->Pop();
+		if (jobQueue == nullptr)
+			break;
+
+		jobQueue->Execute();
+	}
 }

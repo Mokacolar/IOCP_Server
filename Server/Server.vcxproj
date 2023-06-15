@@ -184,7 +184,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ClientPacketHandler.cpp" />
-    <ClCompile Include="ConcurrentQueue.cpp" />
     <ClCompile Include="ConcurrentStack.cpp" />
     <ClCompile Include="Enum.pb.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
@@ -218,7 +217,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ClientPacketHandler.h" />
-    <ClInclude Include="ConcurrentQueue.h" />
     <ClInclude Include="ConcurrentStack.h" />
     <ClInclude Include="Enum.pb.h" />
     <ClInclude Include="GameSessionManager.h" />

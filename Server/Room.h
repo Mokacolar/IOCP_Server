@@ -1,14 +1,16 @@
 #pragma once
-class Room
+#include "JobQueue.h"
+
+class Room : public JobQueue
 {
 public:
+	// 싱글쓰레드 환경인마냥 코딩
 	void Enter(PlayerRef player);
 	void Leave(PlayerRef player);
 	void Broadcast(SendBufferRef sendBuffer);
 
 private:
-	USE_LOCK;
 	map<uint64, PlayerRef> _players;
 };
-extern Room GRoom;
-//미래에는 여러 room을 이용할 수 있는 roommanager같은게 필요
+
+extern shared_ptr<Room> GRoom;

@@ -71,8 +71,9 @@ bool Handle_C_ENTER_GAME(PacketSessionRef& session, Protocol::C_ENTER_GAME& pkt)
 	uint64 index = pkt.playerindex();
 	// TODO : Validation
 
-	PlayerRef player = gameSession->_players[index]; // READ_ONLY
-	GRoom.Enter(player); // WRITE_LOCK
+	PlayerRef player = gameSession->_players[index]; // READ_ONLY?
+
+	GRoom->DoAsync(&Room::Enter, player);
 
 	Protocol::S_ENTER_GAME enterGamePkt;
 	enterGamePkt.set_success(true);
@@ -86,13 +87,11 @@ bool Handle_C_CHAT(PacketSessionRef& session, Protocol::C_CHAT& pkt)
 {
 	std::cout << pkt.msg() << endl;
 
-	//client에서 보낸 pkt을 다시 서버에서 다른 client에 보낼
-	//수 있도록 다시 pkt에 넣어서 보냄
 	Protocol::S_CHAT chatPkt;
 	chatPkt.set_msg(pkt.msg());
 	auto sendBuffer = ClientPacketHandler::MakeSendBuffer(chatPkt);
 
-	GRoom.Broadcast(sendBuffer); // WRITE_LOCK
+	GRoom->DoAsync(&Room::Broadcast, sendBuffer);
 
 	return true;
 }

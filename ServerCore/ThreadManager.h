@@ -1,11 +1,11 @@
 #pragma once
 
-#include <mutex>
-#include <vector>
 #include <thread>
 #include <functional>
 
-using namespace std;
+/*------------------
+	ThreadManager
+-------------------*/
 
 class ThreadManager
 {
@@ -13,16 +13,16 @@ public:
 	ThreadManager();
 	~ThreadManager();
 
-	void		Launch(function<void(void)> callback);
-	void		Join();
+	void	Launch(function<void(void)> callback);
+	void	Join();
 
 	static void InitTLS();
 	static void DestroyTLS();
 
+	static void DoGlobalQueueWork();
 
 private:
-	Mutex				_lock;
+	Mutex			_lock;
 	vector<thread>	_threads;
 };
-
 

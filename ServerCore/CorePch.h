@@ -21,3 +21,6 @@ using namespace std;
 #include "Memory.h"
 #include "SendBuffer.h"
 #include "Session.h"
+#include "GlobalQueue.h"
+#include "JobQueue.h"
+#include "LockQueue.h"
