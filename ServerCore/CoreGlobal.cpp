@@ -5,23 +5,31 @@
 #include "DeadLockProfiler.h"
 #include "SocketUtils.h"
 #include "SendBuffer.h"
+#include "GlobalQueue.h"
+#include "JobTimer.h"
+#include "DBConnectionPool.h"
 
-Memory*				GMemory				= nullptr;
-GlobalQueue*		GGlobalQueue		= nullptr;
-ThreadManager*		GThreadManager		= nullptr;
-DeadLockProfiler*	GDeadLockProfiler	= nullptr;
-SendBufferManager*	GSendBufferManager	= nullptr;
+ThreadManager* GThreadManager = nullptr;
+Memory* GMemory = nullptr;
+SendBufferManager* GSendBufferManager = nullptr;
+GlobalQueue* GGlobalQueue = nullptr;
+JobTimer* GJobTimer = nullptr;
+
+DeadLockProfiler* GDeadLockProfiler = nullptr;
+DBConnectionPool* GDBConnectionPool = nullptr;
 
 class CoreGlobal
 {
 public:
 	CoreGlobal()
 	{
-		GThreadManager				= new ThreadManager();
-		GMemory						= new Memory();
-		GSendBufferManager			= new SendBufferManager();
-		GDeadLockProfiler			= new DeadLockProfiler();
-		GGlobalQueue				= new GlobalQueue();
+		GThreadManager = new ThreadManager();
+		GMemory = new Memory();
+		GSendBufferManager = new SendBufferManager();
+		GGlobalQueue = new GlobalQueue();
+		GJobTimer = new JobTimer();
+		GDeadLockProfiler = new DeadLockProfiler();
+		GDBConnectionPool = new DBConnectionPool();
 		SocketUtils::Init();
 	}
 
@@ -30,8 +38,10 @@ public:
 		delete GThreadManager;
 		delete GMemory;
 		delete GSendBufferManager;
-		delete GDeadLockProfiler;
 		delete GGlobalQueue;
+		delete GJobTimer;
+		delete GDeadLockProfiler;
+		delete GDBConnectionPool;
 		SocketUtils::Clear();
 	}
 } GCoreGlobal;
